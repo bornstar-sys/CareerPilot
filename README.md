@@ -8,7 +8,7 @@ then integrate an Android application.
 
 ## Current status
 
-Phase 0 is in progress.
+Phase 0 foundation is implemented. Gemini free-tier configuration is prepared locally; live API access is not yet verified. Phase 1 awaits confirmation.
 
 Implemented and verified:
 - Python package with editable installation.
@@ -76,3 +76,4 @@ Configuration validation does not verify credentials with a provider.
 
 - docs/progress.md: phase status and verification evidence.
 - docs/decisions/0001-ai-first-foundation.md: initial architecture decisions.
+

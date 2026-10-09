@@ -4,9 +4,11 @@ Updated: 2026-10-10
 
 ## Current phase
 
-Phase 0: Project Foundation - in progress.
+Phase 0: Project Foundation - implementation complete.
+Final documentation push pending.
+Phase 1 requires explicit user confirmation.
 
-## Verified milestones
+## Completed milestones
 
 - [x] Project created at D:\Projects\CareerPilot.
 - [x] Python 3.13.16 virtual environment.
@@ -14,26 +16,42 @@ Phase 0: Project Foundation - in progress.
 - [x] Virtual environment and local secrets excluded from Git.
 - [x] Editable Python package installation.
 - [x] Dependency check: no broken requirements.
+- [x] Windows development dependency snapshot recorded.
 - [x] Configuration loading and validation.
 - [x] Foundation and configuration tests: 12 passed.
-- [x] Local configuration: development, mock provider, 30-second timeout.
+- [x] README and initial architecture decision recorded.
+- [x] Initial commit pushed to GitHub.
+- [x] Local and remote commit hashes verified as matching.
+- [x] Gemini selected for free-tier development.
+- [x] User confirmed Google project shows Free tier.
+- [x] Local configuration loads provider, model, and a nonblank API key.
 
-## Remaining Phase 0 tasks
+## Provider configuration
 
-- [ ] Review dependency snapshot and project documentation.
-- [ ] Select initial LLM provider and establish account configuration.
-- [ ] Create the first local commit.
-- [ ] Create GitHub repository and push.
-- [ ] Final Phase 0 review and user confirmation.
+Provider: gemini
+Configured model: gemini-3.5-flash-lite
+Budget constraint: free tier only; do not enable billing.
+Credentials: stored only in ignored backend/.env.
+Development data: fictional resumes and sample content.
 
-No live LLM integration has been implemented or verified.
+No live API call has been made.
+API key validity, model access, and usable quota are not yet verified.
+The mock setting is a configuration default; no mock client exists yet.
+
+## Verification evidence
+
+Initial commit: 6883175a43dfa2905557a3b06e105c4977bb4878
+Repository: https://github.com/bornstar-sys/CareerPilot
+Tests: 12 passed.
+Dependency check: no broken requirements found.
+Git exclusions: .env and .venv absent from tracked project files.
 
 ## Roadmap
 
 | Phase | Scope | Status |
 |---|---|---|
-| 0 | Project Foundation | In progress |
-| 1 | LLM Integration and Tool Calling | Not started |
+| 0 | Project Foundation | Implementation complete; final documentation push pending |
+| 1 | LLM Integration and Tool Calling | Awaiting confirmation |
 | 2 | Agent Planning with LangGraph | Not started |
 | 3 | Persistent Memory | Not started |
 | 4 | RAG and Vector Database | Not started |
