@@ -1,0 +1,35 @@
+# Local secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Python environments
+.venv/
+venv/
+
+# Python generated files
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# Test and analysis output
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Local user data and logs
+backend/data/
+*.log
+
+# Editor and operating system files
+.idea/
+.vscode/
+Thumbs.db
+.DS_Store
