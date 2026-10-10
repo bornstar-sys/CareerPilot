@@ -37,20 +37,21 @@ def test_dotenv_loading_and_environment_override(tmp_path, monkeypatch):
     assert load_settings(env_file).llm_timeout_seconds == 60
 
 
-def test_live_provider_requires_model():
+@pytest.mark.parametrize("provider", ["openai", "groq"])
+def test_live_provider_requires_model(provider):
     with pytest.raises(ValidationError, match="LLM_MODEL"):
-        Settings(llm_provider="openai")
+        Settings(llm_provider=provider)
 
 
+@pytest.mark.parametrize("provider", ["openai", "groq"])
 @pytest.mark.parametrize("key", [None, "", "   "])
-def test_live_provider_requires_nonblank_key(key):
+def test_live_provider_requires_nonblank_key(provider, key):
     with pytest.raises(ValidationError, match="LLM_API_KEY"):
         Settings(
-            llm_provider="openai",
+            llm_provider=provider,
             llm_model="test-model",
             llm_api_key=key,
         )
-
 
 def test_key_is_excluded_from_representation_and_serialization():
     dummy_key = "dummy-key-for-tests-only"
@@ -89,3 +90,20 @@ def test_typo_in_dotenv_is_rejected(tmp_path):
 
     with pytest.raises(ValidationError):
         load_settings(env_file)
+
+
+def test_groq_settings_load_from_dotenv(tmp_path):
+    env_file = tmp_path / ".env"
+    env_file.write_text(
+        "CAREERPILOT_LLM_PROVIDER=groq\n"
+        "CAREERPILOT_LLM_MODEL=openai/gpt-oss-120b\n"
+        "CAREERPILOT_LLM_API_KEY=dummy-key-for-tests-only\n",
+        encoding="utf-8",
+    )
+
+    settings = load_settings(env_file)
+
+    assert settings.llm_provider == "groq"
+    assert settings.llm_model == "openai/gpt-oss-120b"
+    assert settings.llm_api_key is not None
+    assert "llm_api_key" not in settings.model_dump()

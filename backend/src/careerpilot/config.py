@@ -19,7 +19,7 @@ class Settings(BaseSettings):
     )
 
     app_env: Literal["development", "test", "production"] = "development"
-    llm_provider: Literal["mock", "openai", "gemini", "anthropic"] = "mock"
+    llm_provider: Literal["mock", "openai", "gemini", "anthropic", "groq"] = "mock"
     llm_model: str = ""
     llm_api_key: SecretStr | None = Field(
         default=None,

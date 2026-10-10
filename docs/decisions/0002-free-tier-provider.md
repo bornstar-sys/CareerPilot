@@ -1,7 +1,7 @@
 # ADR 0002: Free-tier LLM provider
 
 Date: 2026-10-10
-Status: Accepted for initial development
+Status: Superseded by ADR 0003 on 2026-10-11
 
 ## Context
 
@@ -25,3 +25,4 @@ Quota exhaustion must produce a controlled error, not a paid fallback.
 Automated tests should use mock responses once the client is implemented.
 Live key validation and model access checks belong to Phase 1.
 Provider-specific code will remain separate from agent logic.
+

@@ -8,17 +8,24 @@ then integrate an Android application.
 
 ## Current status
 
-Phase 0 foundation is implemented. Gemini free-tier configuration is prepared locally; live API access is not yet verified. Phase 1 awaits confirmation.
+Phase 1: LLM Integration and Tool Calling is implemented and verified.
+Phase 2 requires explicit user confirmation.
 
 Implemented and verified:
-- Python package with editable installation.
-- Validated environment and dotenv configuration.
-- Mock provider configuration as the default.
-- Required model and API key validation for live providers.
-- Secret exclusion from settings representations and serialization.
-- 12 passing foundation and configuration tests.
+- Editable Python package with validated Pydantic configuration.
+- Mock configuration defaults; no credentials required for automated tests.
+- Groq integration using groq==1.7.0 and openai/gpt-oss-120b.
+- User-confirmed Groq Free plan.
+- Live text generation through the reusable client.
+- Validated, deterministic compare_skills tool.
+- Live tool-call round trip with a final model explanation.
+- 39 passing offline tests.
 
-LLM calls, agent workflows, APIs, and Android screens are not implemented yet.
+The tool-calling flow performs at most two API requests and one tool
+execution. Automatic retries are disabled. Skill comparison ignores case
+and surrounding whitespace but does not infer synonyms or proficiency.
+
+Planning, persistent memory, RAG, FastAPI, and Android are not implemented.
 
 ## Planned stack
 
@@ -72,8 +79,37 @@ Configuration validation does not verify credentials with a provider.
 - Do not log raw settings inputs or complete validation error payloads.
 - Uploaded documents will be treated as untrusted data.
 
+### Groq development configuration
+
+After copying backend/.env.example to backend/.env, configure locally:
+
+    CAREERPILOT_APP_ENV=development
+    CAREERPILOT_LLM_PROVIDER=groq
+    CAREERPILOT_LLM_MODEL=openai/gpt-oss-120b
+    CAREERPILOT_LLM_API_KEY=<your-private-groq-key>
+    CAREERPILOT_LLM_TIMEOUT_SECONDS=30
+
+Keep .env.example on mock defaults with empty credentials.
+The mock value is a configuration default, not an implemented mock client.
+
+From backend, use .\.venv\Scripts\python.exe directly if PowerShell
+blocks virtual-environment activation.
+
+Public Python entry points:
+- careerpilot.llm.generate_text(settings, prompt)
+- careerpilot.tool_calling.run_skill_comparison(settings, prompt)
+
+The comparison entry point expects both current and required skill lists.
+It explicitly requires compare_skills; autonomous tool selection and
+multi-step planning are future work.
+
+Free-tier quotas and model availability may change. No paid fallback is
+implemented. API failures are surfaced as controlled LLMError messages.
+
 ## Project records
 
 - docs/progress.md: phase status and verification evidence.
 - docs/decisions/0001-ai-first-foundation.md: initial architecture decisions.
+- docs/decisions/0002-free-tier-provider.md: original Gemini decision.
+- docs/decisions/0003-groq-phase1.md: verified Groq replacement.
 
