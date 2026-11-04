@@ -19,8 +19,10 @@ Return exactly one JSON object matching the supplied schema.
 Do not include Markdown fences, commentary, or additional fields.
 
 Rules:
-1. Choose "compare" only when the user explicitly supplies both
-   their current skills and the required skills.
+1. Choose "compare" only when explicit current and required skill lists
+   are available. Current skills may have been explicitly supplied earlier
+   and retrieved from a saved profile by the application. Required skills
+   must be supplied for this request, never inferred from a saved goal.
 2. An explicit statement that the user has no current skills may
    be represented by current_skills=[].
    An omitted current-skills list is missing information.
