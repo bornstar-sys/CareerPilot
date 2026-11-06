@@ -53,8 +53,8 @@ def main():
         from careerpilot.retrieval import RetrievalService
         from careerpilot.vector_store import PostgresVectorStore
         settings = load_settings(
-    		env_file=Path(__file__).resolve().parents[1] / ".env"
-	)
+            env_file=Path(__file__).resolve().parents[1] / ".env"
+        )
         store = PostgresVectorStore(load_database_settings(args.db_env))
         if not set(IDS).issubset({d.document_id for d in store.list_documents(OWNER)}):
             raise SystemExit('Run scripts/retrieval_demo.py first to store the Step 3 demo documents.')
