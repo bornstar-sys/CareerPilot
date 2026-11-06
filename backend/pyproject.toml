@@ -17,6 +17,10 @@ dependencies = [
 dev = [
     "pytest==9.1.1",
 ]
+rag = [
+    "fastembed==0.9.1",
+    "psycopg[binary]==3.3.8",
+]
 
 [tool.setuptools.packages.find]
 where = ["src"]
